@@ -5,7 +5,7 @@
 *~
 .*
 *.log
-config.json
+# config.json
 
 ###############################################################################
 # Ignore this directories
@@ -23,3 +23,5 @@ node_modules
 !.jshintrc
 !.nvmrc
 !.gitattributes
+
+data/

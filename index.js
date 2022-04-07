@@ -16,13 +16,15 @@ app.use(bodyParser.json());
 
 verifyGitHubSignature.setSecret(secret);
 
-getConfig(function (config) {
+getConfig(function (configs) {
+    console.log(`configs`, configs)
+    const config = configs[process.env.REPO_CONFIG || 'default']
     deployTasks.initConfig(config);
 
     var branch = config.branch || 'master';
 
     app.post(config.route, function (req, res) {
-
+        console.log('req.body', req.body)
         // Checking if request is authentic
         if (verifyGitHubSignature.ofRequest(req)) {
 
