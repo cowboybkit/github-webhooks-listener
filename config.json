@@ -1,12 +1,21 @@
 {
     "draw_blog":
-        {
-            "route": "/payload",
-            "port": "5000",
-            "appPath": "/Users/koideveloper/Documents/5_Working/Projects/CryptoNFT/2_Code/github-webhooks-listener/data/draw-blog",
-            "stopCmd": "pm2 del draw_blog",
-            "updateCmd": "git checkout themes && git pull origin master",
-            "postUpdateCmd": "npm install && cd themes/tranquilpeak-theme && npm install && npm run prod && cd ../.. && npm run build",
-            "startCmd": "pm2 start 'npm run server' --name draw_blog"
-        }
+    {
+        "branch": "master",
+        "appPath": "/Users/koideveloper/Documents/5_Working/Projects/CryptoNFT/2_Code/github-webhooks-listener/data/draw-blog",
+        "stopCmd": "pm2 del draw_blog",
+        "updateCmd": "git checkout themes && git pull origin master",
+        "postUpdateCmd": "npm install && cd themes/tranquilpeak-theme && npm install && npm run prod && cd ../.. && npm run build",
+        "startCmd": "pm2 start 'npm run server' --name draw_blog"
+    },
+    "gamedeck":
+    {
+        "branch": "gamedeck",
+        "appPath": "/Users/koideveloper/Documents/5_Working/Projects/CryptoNFT/2_Code/github-webhooks-listener/data/gamedeck",
+        "stopCmd": "pm2 del gamedeck",
+        "updateCmd": "git checkout themes && git pull origin gamedeck",
+        "postUpdateCmd": "npm install && cd themes/gamedeck-theme && npm install && cd ../.. && npm run build",
+        "startCmd": "pm2 start 'npm run server' --name gamedeck"
+    }
+
 }

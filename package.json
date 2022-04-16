@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "start": "cross-env CONFIG_FILE=./config.live.json REPO_CONFIG=draw_blog DEPLOY_LISTENER_SECRET=hk1xma6KqAxVAsUp pm2 start index.js --name github_webhook",
-    "dev": "cross-env REPO_CONFIG=draw_blog DEPLOY_LISTENER_SECRET=hk1xma6KqAxVAsUp node index.js"
+    "start": "cross-env CONFIG_FILE=./config.live.json PORT=5000 DEPLOY_LISTENER_SECRET=hk1xma6KqAxVAsUp pm2 start index.js --name github_webhook",
+    "dev": "cross-env DEPLOY_LISTENER_SECRET=hk1xma6KqAxVAsUp node index.js"
   },
   "repository": {
     "type": "git",

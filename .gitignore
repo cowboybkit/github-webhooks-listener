@@ -25,3 +25,4 @@ node_modules
 !.gitattributes
 
 data/
+**/package-lock.json

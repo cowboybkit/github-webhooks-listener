@@ -10,6 +10,7 @@ var express = require('express'),
     getConfig = require('./lib/getConfig'),
     deployTasks = require('./lib/deployTasks');
 
+const keepTasks = {}
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(bodyParser.json());
@@ -17,38 +18,39 @@ app.use(bodyParser.json());
 verifyGitHubSignature.setSecret(secret);
 
 getConfig(function (configs) {
-    console.log(`configs`, configs)
-    const config = configs[process.env.REPO_CONFIG || 'default']
-    deployTasks.initConfig(config);
 
-    var branch = config.branch || 'master';
 
-    app.post(config.route, function (req, res) {
-        console.log('req.body', req.body)
+    app.post('/payload', function (req, res) {
+
+        // console.log('req.body', req.body)
         // Checking if request is authentic
         if (verifyGitHubSignature.ofRequest(req)) {
-
-            // If master was updated, do stuff
-            if (req.body.ref && req.body.ref === `refs/heads/${branch}`) {
-
-                console.log('Valid payload! Running commands');
-
-                deployTasks.run(function () {
-                    res.status(200).send();
-                });
-
-            } else {
-                // if other branches were updated, send 200 only to make github happy...
+            let config = null
+            for(const siteKey in configs){
+                const site = configs[siteKey]
+                if (req.body.ref && req.body.ref === `refs/heads/${site.branch}`){
+                    config = site
+                }
+            }
+            if(!config){
                 console.log(`Received payload unrelated to ${branch} branch`);
                 res.status(200).send();
+                return;
             }
+            deployTasks.initConfig(config);
+            // If master was updated, do stuff
+            console.log('Valid payload! Running commands');
+            deployTasks.run(function () {
+                res.status(200).send();
+            });
         } else {
             console.warn('Received payload with an invalid secret');
             res.status(403).send();
         }
     });
 
-    server.listen(config.port, function () {
-        console.log(`Listening for webhook events on port ${config.port}`);
+    const port = process.env.PORT || 5000
+    server.listen(port, function () {
+        console.log(`Listening for webhook events on port ${port}`);
     });
 });
