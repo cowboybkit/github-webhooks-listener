@@ -16,6 +16,15 @@
         "updateCmd": "git checkout themes && git pull origin gamedeck",
         "postUpdateCmd": "npm install && cd themes/gamedeck-theme && npm install && cd ../.. && npm run build",
         "startCmd": "pm2 start 'npm run server' --name gamedeck"
+    },
+    "heatmob":
+    {
+        "branch": "heatmob",
+        "appPath": "/home/ubuntu/websites/github-webhooks-listener/data/heatmob",
+        "stopCmd": "pm2 del heatmob",
+        "updateCmd": "git checkout themes && git pull origin heatmob",
+        "postUpdateCmd": "npm install && npm run build",
+        "startCmd": "pm2 start 'hexo server -p 4002' --name heatmob"
     }
 
 }
