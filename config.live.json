@@ -6,7 +6,7 @@
         "stopCmd": "pm2 del draw_blog",
         "updateCmd": "git checkout themes && git pull origin master",
         "postUpdateCmd": "export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v14.19.3/bin && nvm use 14 && npm install && cd themes/kratos-rebirth && npm install && cd ../..  && npm run build",
-        "startCmd": "pm2 start 'nvm use 14 && npm run server' --name draw_blog"
+        "startCmd": "pm2 start 'npm run server' --name draw_blog"
     },
     "gamedeck":
     {
