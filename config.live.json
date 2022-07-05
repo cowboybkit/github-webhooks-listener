@@ -5,8 +5,8 @@
         "appPath": "/home/ubuntu/websites/github-webhooks-listener/data/draw-blog",
         "stopCmd": "pm2 del draw_blog",
         "updateCmd": "git checkout themes && git pull origin master",
-        "postUpdateCmd": "npm install && npm run build",
-        "startCmd": "pm2 start 'npm run server' --name draw_blog"
+        "postUpdateCmd": "nvm use 14 && npm install && cd themes/kratos-rebirth && npm install && cd ../..  && npm run build",
+        "startCmd": "pm2 start 'nvm use 14 && npm run server' --name draw_blog"
     },
     "gamedeck":
     {
